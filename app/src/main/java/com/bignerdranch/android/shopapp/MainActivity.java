@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bignerdranch.android.shopapp.adapter.DiscountAdapter;
-import com.bignerdranch.android.shopapp.model.Discount;
+import com.bignerdranch.android.shopapp.adapter.ProductAdapter;
+import com.bignerdranch.android.shopapp.database.Database;
+import com.bignerdranch.android.shopapp.model.Product;
 
 
 import org.imaginativeworld.whynotimagecarousel.CarouselItem;
@@ -29,14 +30,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.relex.circleindicator.CircleIndicator2;
-
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView discountRecyclerView;
-    DiscountAdapter discountAdapter;
-    List<Discount> discountList;
+    RecyclerView productRecycler;
+    ProductAdapter productAdapter;
+    List<Product> productList;
     ImageView womentProduct,menProduct,kidProduct,sunglassesProduct,cartShopMain,account;
+
+    Database database;
+    List<String> userNameList;
+
 
 
     @Override
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         sunglassesProduct = findViewById(R.id.sunglassesProduct);
         cartShopMain= findViewById(R.id.cartShopMain);
         account = findViewById(R.id.account);
+        productRecycler = findViewById(R.id.discountRecycler);
 
         // click womentProduct
         womentProduct.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +108,36 @@ public class MainActivity extends AppCompatActivity {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(MainActivity.this, Login.class);
-                startActivity(i);
+                Intent i;
+                int result = CheckLoginAccount();
+                if(result == 1){
+                     i =new Intent(MainActivity.this, LoginSuccessful.class);
+                    startActivity(i);
+                }
+                else {
+                    i =new Intent(MainActivity.this, Login.class);
+                    startActivity(i);
+                }
+
+
+
             }
         });
+
+
+        //adding data product
+        productList = new ArrayList<>();
+        productList.add(new Product("T-Shirt Spanish","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
+        productList.add(new Product("Blouse","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
+        productList.add(new Product("Shirt","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
+        productList.add(new Product("Light blouse","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
+        productList.add(new Product("Shirt","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
+        productList.add(new Product("Light blouse","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
+
+
+        setProductRecycler(productList);
+
+
 
 
 
@@ -226,5 +256,34 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public int CheckLoginAccount(){
+        userNameList = new ArrayList<>();
+        String userName;
+        database = new Database(this,"ProductSQL.sqlite",null,1 );
+        Cursor productDatabase = database.GetData("SELECT userName FROM Login");
+        while (productDatabase.moveToNext()){
+            userName = productDatabase.getString(0);
+            userNameList.add(userName);
+        }
+
+        if(userNameList.size() > 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+
+
+    private void setProductRecycler(List<Product> productDataList) {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        productRecycler.setLayoutManager(layoutManager);
+        productAdapter= new ProductAdapter(this,productDataList);
+        productRecycler.setAdapter(productAdapter);
+    }
+
+
 
 }

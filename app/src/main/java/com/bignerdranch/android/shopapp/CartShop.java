@@ -5,9 +5,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,7 +36,8 @@ public class CartShop extends AppCompatActivity {
 
     ImageView  back;
     TextView cartPrice,totalPrice,delivery,total;
-
+    Button btnCheckOut;
+    List<String> userNameList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,17 @@ public class CartShop extends AppCompatActivity {
 //                Intent back = new Intent(ProductDetail.this, WonmenProduct.class);
 //                startActivity(back);
 //                finish();
-                onBackPressed();
+                int result = CheckLogin();
+                if(result == 1){
+                    Intent back = new Intent(CartShop.this, MainActivity.class);
+                    startActivity(back);
+                }
+                else{
+                    onBackPressed();
+                }
+
+
+
             }
         });
 
@@ -77,6 +90,7 @@ public class CartShop extends AppCompatActivity {
 
         GetListProduct();
         TotalPrice ();
+        Checkout();
 
 
 
@@ -191,10 +205,87 @@ public class CartShop extends AppCompatActivity {
             total.setText("$".concat(String.valueOf(totalFloat)));
         }
 
-
-
     }
 
+
+    public void Checkout(){
+        btnCheckOut = findViewById(R.id.btnCheckOut);
+        int result = CheckLogin();
+        if(result == 1){
+            btnCheckOut.setEnabled(true);
+        }
+        else{
+            btnCheckOut.setEnabled(false);
+        }
+
+
+        btnCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btnCheckOut.isEnabled() == false){
+                    AlertDialog.Builder dialogRemoveCart = new AlertDialog.Builder(CartShop.this);
+                    dialogRemoveCart.setMessage("Please login to checkout");
+                    dialogRemoveCart.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent i =new Intent(CartShop.this, Login.class);
+                            startActivity(i);
+                        }
+                    });
+                    dialogRemoveCart.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    dialogRemoveCart.show();
+                }
+                else{
+                    AlertDialog.Builder dialogRemoveCart = new AlertDialog.Builder(CartShop.this);
+                    dialogRemoveCart.setMessage("Do you want to checkout?");
+                    dialogRemoveCart.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            database.QueryData("DELETE FROM Product");
+                            Toast.makeText(CartShop.this,"You paid successfully ",Toast.LENGTH_SHORT ).show();
+                            GetListProduct();
+                            TotalPrice ();
+                            Intent i =new Intent(CartShop.this, MainActivity.class);
+                            startActivity(i);
+                        }
+                    });
+                    dialogRemoveCart.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    dialogRemoveCart.show();
+                }
+
+
+            }
+        });
+    }
+
+
+    public int CheckLogin(){
+        String userName;
+        userNameList = new ArrayList<>();
+
+        Cursor productDatabase = database.GetData("SELECT userName FROM Login");
+        while (productDatabase.moveToNext()){
+            userName = productDatabase.getString(0);
+            userNameList.add(userName);
+        }
+        Toast.makeText(CartShop.this,String.valueOf(userNameList.size()),Toast.LENGTH_SHORT ).show();
+        if(userNameList.size() > 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
 
 
 }

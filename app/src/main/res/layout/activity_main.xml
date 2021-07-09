@@ -226,6 +226,29 @@
             app:showTopShadow="false"
             app:topShadowAlpha="0.6" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/discountRecycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="New"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/discountRecycler"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carousel" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
