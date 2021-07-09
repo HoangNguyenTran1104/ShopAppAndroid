@@ -211,18 +211,11 @@ public class CartShop extends AppCompatActivity {
     public void Checkout(){
         btnCheckOut = findViewById(R.id.btnCheckOut);
         int result = CheckLogin();
-        if(result == 1){
-            btnCheckOut.setEnabled(true);
-        }
-        else{
-            btnCheckOut.setEnabled(false);
-        }
-
 
         btnCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btnCheckOut.isEnabled() == false){
+                if(result == 0){
                     AlertDialog.Builder dialogRemoveCart = new AlertDialog.Builder(CartShop.this);
                     dialogRemoveCart.setMessage("Please login to checkout");
                     dialogRemoveCart.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -250,7 +243,7 @@ public class CartShop extends AppCompatActivity {
                             Toast.makeText(CartShop.this,"You paid successfully ",Toast.LENGTH_SHORT ).show();
                             GetListProduct();
                             TotalPrice ();
-                            Intent i =new Intent(CartShop.this, MainActivity.class);
+                            Intent i =new Intent(CartShop.this, CheckoutSuccessful.class);
                             startActivity(i);
                         }
                     });

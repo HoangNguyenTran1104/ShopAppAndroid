@@ -99,8 +99,8 @@ public class ProductDetail extends AppCompatActivity {
 
         Cursor productDatabase = database.GetData("SELECT NAME FROM Product");
         while (productDatabase.moveToNext()){
-            detailName = productDatabase.getString(0);
-            productList.add(detailName);
+            nameSQL= productDatabase.getString(0);
+            productList.add(nameSQL);
         }
 
         if(productList.contains(detailName)){
