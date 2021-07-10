@@ -15,7 +15,7 @@ public class Database extends SQLiteOpenHelper {
     //khong tra ket qua
     public void QueryData(String sql){
         SQLiteDatabase database = getWritableDatabase(); // luu vao
-        database. execSQL(sql); //thuc thi cau lenh
+        database.execSQL(sql); //thuc thi cau lenh
     }
 
     //Tra ket qua ve

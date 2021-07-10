@@ -110,7 +110,7 @@ public class CartShop extends AppCompatActivity {
             imageSQL = productDatabase.getInt(6);
             idSQL = productDatabase.getInt(0);
 
-//            Toast.makeText(this,nameSQL,Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,nameSQL,Toast.LENGTH_SHORT).show();
             productList.add(new Product(idSQL,nameSQL,descriptionSQL,priceSQL,countSQL,priceCountSQL,imageSQL));
         }
 
@@ -150,7 +150,7 @@ public class CartShop extends AppCompatActivity {
                 price = String.valueOf(priceCount);
                 price = "$".concat(price);
                 database.QueryData("UPDATE Product SET count = '"+String.valueOf(count)+"',priceCount='"+price+"' WHERE Id = '"+id+"'");
-                Toast.makeText(this,price,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,price,Toast.LENGTH_SHORT).show();
                 GetListProduct();
                 TotalPrice ();
     }
@@ -165,7 +165,7 @@ public class CartShop extends AppCompatActivity {
             price = String.valueOf(priceCount);
             price = "$".concat(price);
             database.QueryData("UPDATE Product SET count = '"+String.valueOf(count)+"',priceCount='"+price+"' WHERE Id = '"+id+"'");
-            Toast.makeText(this,price,Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,price,Toast.LENGTH_SHORT).show();
             GetListProduct();
         }
         else{
@@ -271,7 +271,7 @@ public class CartShop extends AppCompatActivity {
             userName = productDatabase.getString(0);
             userNameList.add(userName);
         }
-        Toast.makeText(CartShop.this,String.valueOf(userNameList.size()),Toast.LENGTH_SHORT ).show();
+        //Toast.makeText(CartShop.this,String.valueOf(userNameList.size()),Toast.LENGTH_SHORT ).show();
         if(userNameList.size() > 0){
             return 1;
         }

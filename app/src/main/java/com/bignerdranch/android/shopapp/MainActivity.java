@@ -261,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
         userNameList = new ArrayList<>();
         String userName;
         database = new Database(this,"ProductSQL.sqlite",null,1 );
+        database.QueryData("CREATE TABLE IF NOT EXISTS Login(userID INTEGER PRIMARY KEY AUTOINCREMENT, userName VARCHAR(200))");
         Cursor productDatabase = database.GetData("SELECT userName FROM Login");
         while (productDatabase.moveToNext()){
             userName = productDatabase.getString(0);
