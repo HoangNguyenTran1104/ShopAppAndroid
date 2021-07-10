@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView productRecycler;
     ProductAdapter productAdapter;
     List<Product> productList;
-    ImageView womentProduct,menProduct,kidProduct,sunglassesProduct,cartShopMain,account;
+    ImageView womentProduct,menProduct,kidProduct,sunglassesProduct,cartShopMain,account,map;
 
     Database database;
     List<String> userNameList;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         sunglassesProduct = findViewById(R.id.sunglassesProduct);
         cartShopMain= findViewById(R.id.cartShopMain);
         account = findViewById(R.id.account);
+        map = findViewById(R.id.map);
         productRecycler = findViewById(R.id.discountRecycler);
 
         // click womentProduct
@@ -104,6 +105,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //map
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(MainActivity.this, GoogleMap.class);
+                startActivity(i);
+            }
+        });
+
+
+
         //account
         account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,13 +140,16 @@ public class MainActivity extends AppCompatActivity {
 
         //adding data product
         productList = new ArrayList<>();
-        productList.add(new Product("T-Shirt Spanish","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
-        productList.add(new Product("Blouse","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
+        productList.add(new Product("Sunglasses 5","These '80s inspired aviator frames are defined by a minimalistic shape in dark ruthenium metal frame. The metal temples are enriched with a Gucci and Web detail.\n_Dark ruthenium metal frame\n_Dark ruthenium metal temples with Gucci lettering and Web detail\n_Solid grey lens\n_100% UVA/UVB protection\n_Temple length: 145mm; Lens height: 50.4mm; Nose bridge length: 16mm\n_Frame height: 5.49cm; Frame width: 14.8cm\n_Made in Italy","$09.00","1",R.drawable.sunglasses5));
+        productList.add(new Product("Blouse 4","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$16.00","1",R.drawable.nu8));
+        productList.add(new Product("Sunglasses 6","These '80s inspired aviator frames are defined by a minimalistic shape in dark ruthenium metal frame. The metal temples are enriched with a Gucci and Web detail.\n_Dark ruthenium metal frame\n_Dark ruthenium metal temples with Gucci lettering and Web detail\n_Solid grey lens\n_100% UVA/UVB protection\n_Temple length: 145mm; Lens height: 50.4mm; Nose bridge length: 16mm\n_Frame height: 5.49cm; Frame width: 14.8cm\n_Made in Italy","$09.00","1",R.drawable.sunglasses6));
+        productList.add(new Product("Men 1","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nam1));
         productList.add(new Product("Shirt","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
-        productList.add(new Product("Light blouse","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
+        productList.add(new Product("Light blouse 2","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$14.00","1",R.drawable.nu6));
+        productList.add(new Product("Men 10","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$18.00","1",R.drawable.nam10));
+        productList.add(new Product("Men 2","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$10.00","1",R.drawable.nam2));
         productList.add(new Product("Shirt","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
-        productList.add(new Product("Light blouse","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
-
+        productList.add(new Product("Light blouse","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$12.00","1",R.drawable.nu4));
 
         setProductRecycler(productList);
 

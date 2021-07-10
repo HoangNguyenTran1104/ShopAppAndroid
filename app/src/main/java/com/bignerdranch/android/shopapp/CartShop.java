@@ -87,7 +87,7 @@ public class CartShop extends AppCompatActivity {
         database.QueryData("CREATE TABLE IF NOT EXISTS Product(Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(200), description VARCHAR(700), price VARCHAR(200), count VARCHAR(10),priceCount VARCHAR(50),imageUrl INTEGER)");
         //insert data
 //        database.QueryData("INSERT INTO Product VALUES(NULL,'Shirt','Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity','$09.00','1','$09.00','"+phoTo+"') ");
-
+//        database.QueryData("DELETE FROM Product");
         GetListProduct();
         TotalPrice ();
         Checkout();
@@ -110,7 +110,7 @@ public class CartShop extends AppCompatActivity {
             imageSQL = productDatabase.getInt(6);
             idSQL = productDatabase.getInt(0);
 
-            Toast.makeText(this,nameSQL,Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this,nameSQL,Toast.LENGTH_SHORT).show();
             productList.add(new Product(idSQL,nameSQL,descriptionSQL,priceSQL,countSQL,priceCountSQL,imageSQL));
         }
 
@@ -169,7 +169,7 @@ public class CartShop extends AppCompatActivity {
             GetListProduct();
         }
         else{
-            Toast.makeText(this, "count must more than 1",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Count must more than 1",Toast.LENGTH_SHORT).show();
         }
         TotalPrice ();
 
@@ -239,12 +239,19 @@ public class CartShop extends AppCompatActivity {
                     dialogRemoveCart.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            database.QueryData("DELETE FROM Product");
-                            Toast.makeText(CartShop.this,"You paid successfully ",Toast.LENGTH_SHORT ).show();
-                            GetListProduct();
-                            TotalPrice ();
-                            Intent i =new Intent(CartShop.this, CheckoutSuccessful.class);
-                            startActivity(i);
+                            total = findViewById(R.id.total);
+                            if(total.getText() !="$00.00"){
+                                database.QueryData("DELETE FROM Product");
+                                Toast.makeText(CartShop.this,"You paid successfully",Toast.LENGTH_SHORT ).show();
+                                GetListProduct();
+                                TotalPrice ();
+                                Intent i =new Intent(CartShop.this, CheckoutSuccessful.class);
+                                startActivity(i);
+                            }
+                            else{
+                                Toast.makeText(CartShop.this,"Don't have product in cart",Toast.LENGTH_SHORT ).show();
+                            }
+
                         }
                     });
                     dialogRemoveCart.setNegativeButton("No", new DialogInterface.OnClickListener() {

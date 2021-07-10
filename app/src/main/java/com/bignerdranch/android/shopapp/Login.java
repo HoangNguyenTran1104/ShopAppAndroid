@@ -1,8 +1,10 @@
 package com.bignerdranch.android.shopapp;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -72,7 +74,21 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"Login successful",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(Login.this,"Login failed",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Login.this,"Login failed",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder dialogRemoveCart = new AlertDialog.Builder(Login.this);
+                    dialogRemoveCart.setTitle("Login failed");
+                    dialogRemoveCart.setMessage("Please input username and password again.");
+
+                    dialogRemoveCart.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    dialogRemoveCart.show();
+
+
+
                 }
             }
         });
@@ -89,7 +105,7 @@ public class Login extends AppCompatActivity {
             userNameList.add(userName);
         }
 
-        Toast.makeText(Login.this,passwordSQL,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Login.this,passwordSQL,Toast.LENGTH_SHORT).show();
         if(userNameList.size() > 0){
             database.QueryData("INSERT INTO Login VALUES(NULL,'"+userNameSQL+"')");
             return 1;

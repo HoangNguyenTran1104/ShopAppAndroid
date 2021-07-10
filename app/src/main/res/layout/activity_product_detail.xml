@@ -41,7 +41,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="688dp"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="Women's tops"
+            android:text="Fashion Shop"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"

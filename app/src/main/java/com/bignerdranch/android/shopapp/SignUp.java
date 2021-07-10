@@ -87,7 +87,7 @@ public class SignUp extends AppCompatActivity {
         }
         else{
             database.QueryData("INSERT INTO Account VALUES(NULL,'"+inputUserName.getText().toString()+"','"+inputEmail.getText().toString().trim()+"','"+inputPassword.getText().toString().trim()+"')");
-            Toast.makeText(SignUp.this, userName+"Sign up successful", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUp.this, userName+" Sign up successful", Toast.LENGTH_LONG).show();
             return 1;
         }
 
