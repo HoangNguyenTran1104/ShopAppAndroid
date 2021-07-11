@@ -68,9 +68,9 @@ public class Login extends AppCompatActivity {
                 String passwordLoginSQL = passwordLogin.getText().toString().trim();
                 int result = Login(userNameLoginSQL,passwordLoginSQL);
                 if(result == 1){
-//                    Intent i =new Intent(Login.this, CartShop.class);
-//                    startActivity(i);
-                    onBackPressed();
+                    Intent i =new Intent(Login.this, CartShop.class);
+                    startActivity(i);
+//                    onBackPressed();
                     Toast.makeText(Login.this,"Login successful",Toast.LENGTH_SHORT).show();
                 }
                 else{
