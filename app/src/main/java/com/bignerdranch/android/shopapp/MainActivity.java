@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        database = new Database(this,"ProductSQL.sqlite",null,1 );
+        database.QueryData("CREATE TABLE IF NOT EXISTS Product(Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(200), description VARCHAR(700), price VARCHAR(200), count VARCHAR(10),priceCount VARCHAR(50),imageUrl INTEGER)");
+        database.QueryData("CREATE TABLE IF NOT EXISTS Login(userID INTEGER PRIMARY KEY AUTOINCREMENT, userName VARCHAR(200))");
+
 
 
         womentProduct = findViewById(R.id.womentProduct);
@@ -140,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
 
         //adding data product
         productList = new ArrayList<>();
-        productList.add(new Product("Sunglasses 5","These '80s inspired aviator frames are defined by a minimalistic shape in dark ruthenium metal frame. The metal temples are enriched with a Gucci and Web detail.\n_Dark ruthenium metal frame\n_Dark ruthenium metal temples with Gucci lettering and Web detail\n_Solid grey lens\n_100% UVA/UVB protection\n_Temple length: 145mm; Lens height: 50.4mm; Nose bridge length: 16mm\n_Frame height: 5.49cm; Frame width: 14.8cm\n_Made in Italy","$09.00","1",R.drawable.sunglasses5));
+        productList.add(new Product("Sunglasses 5","These 80s inspired aviator frames are defined by a minimalistic shape in dark ruthenium metal frame. The metal temples are enriched with a Gucci and Web detail. \n_Dark ruthenium metal frame \n_Dark ruthenium metal temples with Gucci lettering and Web detail \n_Solid grey lens \n_100% UVA/UVB protection \n_Temple length: 145mm; Lens height: 50.4mm; Nose bridge length: 16mm \n_Frame height: 5.49cm; Frame width: 14.8cm \n_Made in Italy","$09.00","1",R.drawable.sunglasses5));
         productList.add(new Product("Blouse 4","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$16.00","1",R.drawable.nu8));
-        productList.add(new Product("Sunglasses 6","These '80s inspired aviator frames are defined by a minimalistic shape in dark ruthenium metal frame. The metal temples are enriched with a Gucci and Web detail.\n_Dark ruthenium metal frame\n_Dark ruthenium metal temples with Gucci lettering and Web detail\n_Solid grey lens\n_100% UVA/UVB protection\n_Temple length: 145mm; Lens height: 50.4mm; Nose bridge length: 16mm\n_Frame height: 5.49cm; Frame width: 14.8cm\n_Made in Italy","$09.00","1",R.drawable.sunglasses6));
+        productList.add(new Product("Sunglasses 6","These 80s inspired aviator frames are defined by a minimalistic shape in dark ruthenium metal frame. The metal temples are enriched with a Gucci and Web detail.\n_Dark ruthenium metal frame\n_Dark ruthenium metal temples with Gucci lettering and Web detail\n_Solid grey lens\n_100% UVA/UVB protection\n_Temple length: 145mm; Lens height: 50.4mm; Nose bridge length: 16mm\n_Frame height: 5.49cm; Frame width: 14.8cm\n_Made in Italy","$09.00","1",R.drawable.sunglasses6));
         productList.add(new Product("Men 1","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nam1));
         productList.add(new Product("Shirt","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$09.00","1",R.drawable.nu1));
         productList.add(new Product("Light blouse 2","Bright colors. Bold phrases. Make a statement and own it. Start with this classic tee and put your own touch on our iconic logo.\n _An essential T-shirt.\n_Crafted from soft jersey.\n_A blank canvas for creativity","$14.00","1",R.drawable.nu6));
