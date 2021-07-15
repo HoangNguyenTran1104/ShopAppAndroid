@@ -82,12 +82,12 @@ public class SignUp extends AppCompatActivity {
         //Toast.makeText(this,inputUserName.getText().toString()+" existed",Toast.LENGTH_LONG).show();
 
         if(userNameList.contains(inputUserName.getText().toString())){
-            Toast.makeText(this,userName+" existed",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,inputUserName.getText().toString()+" existed",Toast.LENGTH_LONG).show();
             return 0;
         }
         else{
             database.QueryData("INSERT INTO Account VALUES(NULL,'"+inputUserName.getText().toString()+"','"+inputEmail.getText().toString().trim()+"','"+inputPassword.getText().toString().trim()+"')");
-            Toast.makeText(SignUp.this, userName+" Sign up successful", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUp.this, inputUserName.getText().toString()+" Sign up successful", Toast.LENGTH_LONG).show();
             return 1;
         }
 
